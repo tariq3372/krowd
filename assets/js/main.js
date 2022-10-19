@@ -1,455 +1,270 @@
 $(function() {
-    
-    "use strict";
-    
-    //===== Prealoder
 
-    
-    if ($('.preloader').length) {
-        $('.preloader').fadeOut();
-    }
+    // Select Dropdown
+    $('html').on('click', function() {
+        $('.select .dropdown').hide();
+    });
+    $('.select').on('click', function(event) {
+        event.stopPropagation();
+    });
+    $('.select .select-control').on('click', function() {
+        $(this).parent().next().toggle();
+    })
+    $('.select .dropdown li').on('click', function() {
+        $(this).parent().toggle();
+        var text = $(this).attr('rel');
+        $(this).parent().prev().find('div').text(text);
+    })
+
+    // date picker
+    $('.datepicker').datepicker({
+        clearBtn: true,
+        format: "dd/mm/yyyy"
+    });
 
 
-    
-    
-    //===== Sticky
-    
-    $(window).on('scroll', function(event) {    
-        var scroll = $(window).scrollTop();
-        if (scroll < 160) {
-            $(".main-header").removeClass("sticky");
-        } else{
-            $(".main-header").addClass("sticky");
+    $(".step-box-content ").on('click', function() {
+
+        $(".step-box-content").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    $(".services-select-option li").on('click', function() {
+
+        $(".services-select-option li").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    $(".opti-list ul li").on('click', function(e) {
+        $(this).find('input[type=checkbox]').prop("checked", !$(this).find('input[type=checkbox]').prop("checked"));
+
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+        } else {
+            $(this).addClass("active");
         }
+    });
+
+    $('input[type=checkbox]').click(function(e) {
+        e.stopPropagation();
+        return true;
+    });
+
+    $(".plan-icon-text").on('click', function() {
+        $(this).find('input[type=radio]').prop("checked", true);
+        $(".plan-icon-text").removeClass("active");
+        $(this).addClass("active");
     });
 
 
 
-
-    //===== faq accrodion
-
-    if ($('.accrodion-grp').length) {
-        var accrodionGrp = $('.accrodion-grp');
-        accrodionGrp.each(function () {
-            var accrodionName = $(this).data('grp-name');
-            var Self = $(this);
-            var accordion = Self.find('.accrodion');
-            Self.addClass(accrodionName);
-            Self.find('.accrodion .accrodion-content').hide();
-            Self.find('.accrodion.active').find('.accrodion-content').show();
-            accordion.each(function () {
-                $(this).find('.accrodion-title').on('click', function () {
-                    if ($(this).parent().parent().hasClass('active') === false) {
-                        $('.accrodion-grp.' + accrodionName).find('.accrodion').removeClass('active');
-                        $('.accrodion-grp.' + accrodionName).find('.accrodion').find('.accrodion-content').slideUp();
-                        $(this).parent().parent().addClass('active');
-                        $(this).parent().parent().find('.accrodion-content').slideDown();
-                    };
+    //multi form ===================================
+    //DOM elements
+    const DOMstrings = {
+        stepsBtnClass: 'multisteps-form__progress-btn',
+        stepsBtns: document.querySelectorAll(`.multisteps-form__progress-btn`),
+        stepsBar: document.querySelector('.multisteps-form__progress'),
+        stepsForm: document.querySelector('.multisteps-form__form'),
+        stepFormPanelClass: 'multisteps-form__panel',
+        stepFormPanels: document.querySelectorAll('.multisteps-form__panel'),
+        stepPrevBtnClass: 'js-btn-prev',
+        stepNextBtnClass: 'js-btn-next'
+    };
 
 
-                });
-            });
+    //remove class from a set of items
+    const removeClasses = (elemSet, className) => {
+
+        elemSet.forEach(elem => {
+
+            elem.classList.remove(className);
+
+        });
+
+    };
+
+    //return exect parent node of the element
+    const findParent = (elem, parentClass) => {
+
+        let currentNode = elem;
+
+        while (!currentNode.classList.contains(parentClass)) {
+            currentNode = currentNode.parentNode;
+        }
+
+        return currentNode;
+
+    };
+
+    //get active button step number
+    const getActiveStep = elem => {
+        return Array.from(DOMstrings.stepsBtns).indexOf(elem);
+    };
+
+    //set all steps before clicked (and clicked too) to active
+    const setActiveStep = activeStepNum => {
+
+        //remove active state from all the state
+        removeClasses(DOMstrings.stepsBtns, 'js-active');
+        removeClasses(DOMstrings.stepsBtns, 'current');
+        
+        //set picked items to active
+        DOMstrings.stepsBtns.forEach((elem, index) => {
+            if (index <= activeStepNum) {
+                elem.classList.add('js-active');
+                $(elem).addClass(index);
+
+            }
+
+            if (index == activeStepNum) {
+                elem.classList.add('current');
+            }
+
+
+        });
+    };
+
+    //get active panel
+    const getActivePanel = () => {
+
+        let activePanel;
+
+        DOMstrings.stepFormPanels.forEach(elem => {
+
+            if (elem.classList.contains('js-active')) {
+
+                activePanel = elem;
+
+            }
+
+        });
+
+        return activePanel;
+
+    };
+
+    //open active panel (and close unactive panels)
+    const setActivePanel = activePanelNum => {
+
+        const animation = $(DOMstrings.stepFormPanels, 'js-active').attr("data-animation");
+
+        //remove active class from all the panels
+        removeClasses(DOMstrings.stepFormPanels, 'js-active');
+        removeClasses(DOMstrings.stepFormPanels, animation);
+        removeClasses(DOMstrings.stepFormPanels, 'animate__animated');
+
+        //show active panel
+        DOMstrings.stepFormPanels.forEach((elem, index) => {
+            if (index === activePanelNum) {
+
+                elem.classList.add('js-active');
+                // stepFormPanels
+                elem.classList.add('animate__animated', animation);
+
+                setTimeout(function() {
+                    removeClasses(DOMstrings.stepFormPanels, 'animate__animated', animation);
+                }, 1200);
+
+                setFormHeight(elem);
+
+            }
         });
 
     };
 
 
+    //set form height equal to current panel height
+    const formHeight = activePanel => {
 
+        const activePanelHeight = activePanel.offsetHeight;
 
+        DOMstrings.stepsForm.style.height = `${activePanelHeight}px`;
 
-    /*---canvas menu activation---*/
-    $('.canvas_open').on('click', function(){
-        $('.offcanvas_menu_wrapper,.off_canvars_overlay').addClass('active')
-    });
-    
-    $('.canvas_close,.off_canvars_overlay').on('click', function(){
-        $('.offcanvas_menu_wrapper,.off_canvars_overlay').removeClass('active')
-    });
+    };
 
-    /*---Off Canvas Menu---*/
-    var $offcanvasNav = $('.offcanvas_main_menu'),
-        $offcanvasNavSubMenu = $offcanvasNav.find('.sub-menu');
-    $offcanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="fa fa-angle-down"></i></span>');
-    
-    $offcanvasNavSubMenu.slideUp();
-    
-    $offcanvasNav.on('click', 'li a, li .menu-expand', function(e) {
-        var $this = $(this);
-        if ( ($this.parent().attr('class').match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/)) && ($this.attr('href') === '#' || $this.hasClass('menu-expand')) ) {
-            e.preventDefault();
-            if ($this.siblings('ul:visible').length){
-                $this.siblings('ul').slideUp('slow');
-            }else {
-                $this.closest('li').siblings('li').find('ul:visible').slideUp('slow');
-                $this.siblings('ul').slideDown('slow');
-            }
+    const setFormHeight = () => {
+        const activePanel = getActivePanel();
+
+        formHeight(activePanel);
+    };
+
+    //STEPS BAR CLICK FUNCTION
+    DOMstrings.stepsBar.addEventListener('click', e => {
+
+        //check if click target is a step button
+        const eventTarget = e.target;
+
+        if (!eventTarget.classList.contains(`${DOMstrings.stepsBtnClass}`)) {
+            return;
         }
-        if( $this.is('a') || $this.is('span') || $this.attr('clas').match(/\b(menu-expand)\b/) ){
-            $this.parent().toggleClass('menu-open');
-        }else if( $this.is('li') && $this.attr('class').match(/\b('menu-item-has-children')\b/) ){
-            $this.toggleClass('menu-open');
+
+        //get active button step number
+        const activeStep = getActiveStep(eventTarget);
+
+        //set all steps before clicked (and clicked too) to active
+        // setActiveStep(activeStep);
+
+        //open active panel
+        // setActivePanel(activeStep);
+    });
+
+    //PREV/NEXT BTNS CLICK
+    DOMstrings.stepsForm.addEventListener('click', e => {
+
+        const eventTarget = e.target;
+
+        //check if we clicked on `PREV` or NEXT` buttons
+        if (!(eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) || eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`))) {
+            return;
         }
-    });
+
+        //find active panel
+        const activePanel = findParent(eventTarget, `${DOMstrings.stepFormPanelClass}`);
+
+        let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(activePanel);
+
+        
+        //set active step and active panel onclick
+        if (eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) ) {
+            activePanelNum--;
+
+            setActiveStep(activePanelNum);
+            setActivePanel(activePanelNum);
+
+        } else if(eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`)  ) { 
+
+         var form = $('#wizard');
+         form.validate();
 
 
+         var parent_fieldset = $('.multisteps-form__panel.js-active');
+         var next_step = true;
+         
+         parent_fieldset.find('.required').each( function(){
+            next_step = false;
+            var form = $('.required');
+            form.validate();
+            $(this).addClass('custom-select is-invalid');
+        }); 
 
-    
-
-    
-    
-
-
-
-    //===== Slick Slider
-    
-        function mainSlider() {
-            
-        var BasicSlider = $('.banner-slider');
-            
-        BasicSlider.on('init', function(e, slick) {
-            var $firstAnimatingElements = $('.banner-area:first-child').find('[data-animation]');
-            doAnimations($firstAnimatingElements);
-        });
-            
-        BasicSlider.on('beforeChange', function(e, slick, currentSlide, nextSlide) {
-            var $animatingElements = $('.banner-area[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
-            doAnimations($animatingElements);
-        });
-            
-        BasicSlider.slick({
-            autoplay: true,
-            autoplaySpeed: 10000,
-            pauseOnHover: false,
-            dots: false,
-            fade: true,
-            arrows: true,
-            prevArrow: '<span class="prev"><i class="flaticon-back"></i></span>',
-            nextArrow: '<span class="next"><i class="flaticon-next"></i></span>',
-            responsive: [
-                { breakpoint: 992, settings: { dots: false, arrows: false } }
-            ]
-        });
-
-        function doAnimations(elements) {
-            var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-            elements.each(function() {
-                var $this = $(this);
-                var $animationDelay = $this.data('delay');
-                var $animationType = 'animated ' + $this.data('animation');
-                $this.css({
-                    'animation-delay': $animationDelay,
-                    '-webkit-animation-delay': $animationDelay
-                });
-                $this.addClass($animationType).one(animationEndEvents, function() {
-                    $this.removeClass($animationType);
-                });
-            });
+         if(next_step === true || form.valid() === true) {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            activePanelNum++;
+            setActiveStep(activePanelNum);
+            setActivePanel(activePanelNum);
         }
-    }
-    mainSlider();
 
 
-
-    $('.explore-project-active').slick({
-        arrows: false,
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        responsive: [
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 3,
-              }
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 2,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-              }
-            }
-        ]
-    });
-
-
-
-
-    $('.explore-project-2-active').slick({
-        arrows: false,
-        dots: true,
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        centerMode:true,
-        centerPadding: "445px",
-        responsive: [
-            {
-              breakpoint: 1600,
-              settings: {
-                slidesToShow: 2,
-                centerPadding: "245px",
-              }
-            },{
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 2,
-                centerPadding: "100px",
-              }
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 2,
-                centerMode: false,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-                centerMode: false,
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-                centerMode: false,
-              }
-            }
-        ]
-    });
-
-
-
-
-
-    $('.portfolio-active').slick({
-        arrows: false,
-        dots: false,
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        responsive: [
-            {
-              breakpoint: 1600,
-              settings: {
-                slidesToShow: 4,
-              }
-            },{
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 4,
-              }
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 3,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-              }
-            }
-        ]
-    });
-
-
-
-    $('.client-active').slick({
-        arrows: false,
-        dots: false,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        centerMode:true,
-        centerPadding: "0px",
-        responsive: [
-            {
-              breakpoint: 1600,
-              settings: {
-                slidesToShow: 2,
-              }
-            },{
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 2,
-              }
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 1,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-              }
-            }
-        ]
-    });
-
-
-
-
-    $('.brand-active').slick({
-        arrows: false,
-        dots: false,
-        infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        responsive: [
-            {
-              breakpoint: 1600,
-              settings: {
-                slidesToShow: 5,
-              }
-            },{
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 4,
-              }
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 4,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 3,
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 2,
-              }
-            }
-        ]
-    });
-
-
-
-
-
-    $('.testimonials-slide').slick({
-        arrows: true,
-        prevArrow: '<span class="prev"><i class="flaticon-back"></i></span>',
-        nextArrow: '<span class="next"><i class="flaticon-next"></i></span>',
-        dots: false,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        focusOnSelect: true,
-        fade: true,
-
-    });
-
-    //===== Magnific Popup
-    
-    $('.image-popup').magnificPopup({
-      type: 'image',
-      gallery:{
-        enabled:true
-      }
-    });
-
-    $('.video-popup').magnificPopup({
-        type: 'iframe'
-        // other options
-    });
-    
+    } 
     
 
-
-    //===== Odometer js
-
-    $('.odometer').appear(function(e) {
-        var odo = $(".odometer");
-        odo.each(function() {
-            var countNumber = $(this).attr("data-count");
-            $(this).html(countNumber);
-        });
-    });
-
-    
-    
-    
-    //===== Back to top
-    
-    // Scroll Event
-    $(window).on('scroll', function () {
-        var scrolled = $(window).scrollTop();
-        if (scrolled > 300) $('.go-top').addClass('active');
-        if (scrolled < 300) $('.go-top').removeClass('active');
-    });
-
-    // Click Event
-    $('.go-top').on('click', function () {
-        $("html, body").animate({
-            scrollTop: "0"
-        }, 1200);
-    });
-    
-    
-    //===== 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 });
+
+    //SETTING PROPER FORM HEIGHT ONLOAD
+    window.addEventListener('load', setFormHeight, true);
+
+    //SETTING PROPER FORM HEIGHT ONRESIZE
+    window.addEventListener('resize', setFormHeight, true);
+})

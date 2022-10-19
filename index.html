@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Wizard V1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="assets/css/animate.min.css">
+	<link rel="stylesheet" href="assets/css/fontawesome-all.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/colors/switch.css">
+	<!-- Color Alternatives -->
+	<link href="assets/css/colors/color-2.css" rel="alternate stylesheet" type="text/css" title="color-2">
+	<link href="assets/css/colors/color-3.css" rel="alternate stylesheet" type="text/css" title="color-3">
+	<link href="assets/css/colors/color-4.css" rel="alternate stylesheet" type="text/css" title="color-4">
+	<link href="assets/css/colors/color-5.css" rel="alternate stylesheet" type="text/css" title="color-5">
+</head>
+
+<body>
+
+	<!-- This code is use for color chooser, you can delete -->
+	<div id="switch-color" class="color-switcher">
+		<div class="open"><i class="fas fa-cog"></i></div>
+		<h4>COLOR OPTION</h4>
+		<ul>
+			<li><a class="color-2" onclick="setActiveStyleSheet('color-2'); return false;" href="#"><i
+						class="fas fa-cog"></i></a> </li>
+			<li><a class="color-3" onclick="setActiveStyleSheet('color-3'); return false;" href="#"><i
+						class="fas fa-cog"></i></a> </li>
+			<li><a class="color-4" onclick="setActiveStyleSheet('color-4'); return false;" href="#"><i
+						class="fas fa-cog"></i></a> </li>
+			<li><a class="color-5" onclick="setActiveStyleSheet('color-5'); return false;" href="#"><i
+						class="fas fa-cog"></i></a> </li>
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+
+
+	<div class="wrapper">
+		<div class="steps-area steps-area-fixed">
+			<div class="image-holder">
+				<img src="assets/img/side-img.jpg" alt="">
+			</div>
+			<div class="steps clearfix">
+				<ul class="tablist multisteps-form__progress">
+					<li class="multisteps-form__progress-btn js-active current">
+						<span>1</span>
+					</li>
+					<li class="multisteps-form__progress-btn">
+						<span>2</span>
+					</li>
+					<li class="multisteps-form__progress-btn last">
+						<span>3</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<form class="multisteps-form__form" action="#" id="wizard" method="POST">
+			<div class="form-area position-relative">
+				<!-- div 1 -->
+				<div class="multisteps-form__panel js-active" data-animation="slideHorz">
+					<div class="wizard-forms">
+						<div class="inner pb-100 clearfix">
+							<div class="form-content pera-content">
+								<div class="step-inner-content">
+									<span class="step-no bottom-line">Step 1</span>
+									<div class="step-progress float-right">
+										<span>1 of 3 completed</span>
+										<div class="step-progress-bar">
+											<div class="progress">
+												<div class="progress-bar"></div>
+											</div>
+										</div>
+									</div>
+									<h2>Kindly Fill The Form</h2>
+									<!-- <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.</p> -->
+									<div class="form-inner-area">
+										<div class="row">
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="name" minlength="2"
+													placeholder="First Name And Last Name *"
+													class="form-control required" required>
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="company_name" minlength="2"
+													placeholder="Company Name *" class="form-control required" required>
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="email" placeholder="Email *"
+													class="form-control required" required>
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="phone_numner" placeholder="Phone Number *"
+													class="form-control required" required>
+											</div>
+										</div>
+									</div>
+									<!-- <div class="upload-documents">
+										<h3>Upload Documents:</h3>
+										<div class="upload-araa bg-white">
+											<input type="hidden" value="" name="fileContent" id="fileContent">
+											<input type="hidden" value="" name="filename" id="filename">
+											<div class="upload-icon float-left">
+												<i class="fas fa-cloud-upload-alt"></i>
+											</div>
+											<div class="upload-text">
+												<span>( File accepted: pdf. doc/ docx -
+												Max file size : 150kb for demo limit )</span>
+											</div>
+											<div class="upload-option text-center">
+												<label for="attach">Upload The Documents</label>
+												<input id="attach" style="visibility:hidden;" type="file">
+											</div>
+										</div>
+									</div> -->
+									<!-- <div class="comment-box">
+										<p><i class="fas fa-comments"></i> Write Somthing note</p>
+										<textarea name="full_comments" placeholder="Write here"></textarea>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<!-- ./inner -->
+						<div class="actions">
+							<ul>
+								<li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span>
+								</li>
+								<li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- div 2 -->
+				<div class="multisteps-form__panel" data-animation="slideHorz">
+					<div class="wizard-forms">
+						<div class="inner pb-100 clearfix">
+							<div class="form-content pera-content">
+								<div class="step-inner-content">
+									<span class="step-no bottom-line">Step 2</span>
+									<div class="step-progress float-right">
+										<span>2 of 3 completed</span>
+										<div class="step-progress-bar">
+											<div class="progress">
+												<div class="progress-bar" style="width:50%"></div>
+											</div>
+										</div>
+									</div>
+									<h2>Kindly Fill The Form</h2>
+									<!-- <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.</p> -->
+									<div class="form-inner-area">
+										<div class="row">
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="number_of_team_member" minlength="2"
+													placeholder="Number of Team Members *">
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="new_client" minlength="2"
+													placeholder="Number of New Clients *">
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="Weekly_revenue" placeholder="Weekly Revenue*">
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="total_revenue" placeholder="Total Revenue*">
+											</div>
+											<div class="col-lg-6 col-md-12">
+												<input type="text" name="expenses" placeholder="Expenses*">
+											</div>
+										</div>
+									</div>
+									<div class="upload-documents">
+										<h3>Upload Documents:</h3>
+										<div class="upload-araa bg-white">
+											<input type="hidden" value="" name="fileContent" id="fileContent">
+											<input type="hidden" value="" name="filename" id="filename">
+											<div class="upload-icon float-left">
+												<i class="fas fa-cloud-upload-alt"></i>
+											</div>
+											<div class="upload-text">
+												<span>( File accepted: pdf. doc/ docx -
+													Max file size : 150kb for demo limit )</span>
+											</div>
+											<div class="upload-option text-center">
+												<label for="attach">Upload The Documents</label>
+												<input id="attach" style="visibility:hidden;" type="file">
+											</div>
+										</div>
+									</div>
+									<div class="comment-box">
+										<p><i class="fas fa-comments"></i> Write Somthing note</p>
+										<textarea name="full_comments" placeholder="Write here"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ./inner -->
+						<div class="actions">
+							<ul>
+								<li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span>
+								</li>
+								<li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- div 3 -->
+				<div class="multisteps-form__panel" data-animation="slideHorz">
+					<div class="wizard-forms">
+						<div class="inner pb-100 clearfix">
+							<div class="form-content pera-content">
+								<div class="step-inner-content">
+									<span class="step-no bottom-line">Step 3</span>
+									<div class="step-progress float-right">
+										<span>3 of 3 completed</span>
+										<div class="step-progress-bar">
+											<div class="progress">
+												<div class="progress-bar" style="width:100%"></div>
+											</div>
+										</div>
+									</div>
+									<h2>Kindly Give Us Your FeedBack</h2>
+									<!-- <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.</p> -->
+									<div class="row">
+
+										<div class="step-content-area col-lg-12 row ">
+											<div class="budget-area col-lg-6 col-md-12">
+												<p>Are You Happy With Your Team</p>
+												<select name="budget">
+													<option>Very happy</option>
+													<option>Its good</option>
+													<option>Its ok</option>
+													<option>We need to talk</option>
+												</select>
+											</div>
+											<div class="comment-box col-lg-6 col-md-12" style="padding-top: 0px">
+												<p style="padding-bottom: 10px"><i class="fas fa-comments"></i> Write
+													Somthing note</p>
+												<textarea name="comments-note"
+													placeholder="Your Content Here"></textarea>
+											</div>
+										</div>
+
+										<div class="step-content-area col-lg-12 row">
+											<div class="budget-area col-lg-6 col-md-12">
+												<p>Are You Happy With Amass</p>
+												<select name="budget">
+													<option>Very happy</option>
+													<option>Its good</option>
+													<option>Its ok</option>
+													<option>We need to talk</option>
+												</select>
+											</div>
+											<div class="comment-box col-lg-6 col-md-12" style="padding-top: 0px">
+												<p style="padding-bottom: 10px"><i class="fas fa-comments"></i> Write
+													Somthing note</p>
+												<textarea name="comments-note"
+													placeholder="Your Content Here"></textarea>
+											</div>
+										</div>
+
+										<div class="step-content-area col-lg-12 row">
+											<div class="budget-area col-lg-6 col-md-12">
+												<p>Are You Missing Anything</p>
+												<select name="budget">
+													<option>Yes</option>
+													<option>No</option>
+												</select>
+											</div>
+											<div class="comment-box col-lg-6 col-md-12" style="padding-top: 0px">
+												<p style="padding-bottom: 10px"><i class="fas fa-comments"></i> Write
+													Somthing note</p>
+												<textarea name="comments-note"
+													placeholder="Your Content Here"></textarea>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<!-- /.inner -->
+						<div class="actions">
+							<ul>
+								<li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span>
+								</li>
+								<li><button type="submit" title="NEXT">SUBMIT <i class="fa fa-arrow-right"></i></button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/conditionize.flexible.jquery.min.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/switch.js"></script>
+	<script>
+		$("#files").change(function () {
+			filename = this.files[0].name
+			// console.log(filename);
+		});
+
+		function UploadFile() {
+			var reader = new FileReader();
+			var file = document.getElementById('attach').files[0];
+			reader.onload = function () {
+				document.getElementById('fileContent').value = reader.result;
+				document.getElementById('filename').value = file.name;
+				document.getElementById('wizard').submit();
+			}
+			reader.readAsDataURL(file);
+		}
+
+		$(document).ready(function () {
+			$('.conditional').conditionize();
+		});
+	</script>
+</body>
+
+</html>
