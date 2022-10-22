@@ -59,7 +59,7 @@
 				</ul>
 			</div>
 		</div>
-		<form class="multisteps-form__form" action="sentMail.php" id="wizard" method="POST">
+		<form class="multisteps-form__form" onsubmit="sendEmail(); reset(); return false;" id="wizard" method="POST">
 			<div class="form-area position-relative">
 				<!-- div 1 -->
 				<div class="multisteps-form__panel js-active" data-animation="slideHorz">
@@ -293,17 +293,34 @@
 							<ul>
 								<li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span>
 								</li>
-								<li><button type="submit" title="NEXT" data-submit="...Sending">SUBMIT <i class="fa fa-arrow-right"></i></button>
+								<li><button type="submit" title="NEXT" data-submit="...Sending">SUBMIT <i
+											class="fa fa-arrow-right"></i></button>
 								</li>
 							</ul>
 						</div>
-						
+
 
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
+	<script src="https://smtpjs.com/v3/smtp.js"></script>
+	<script>
+		function sendEmail() {
+			Email.send({
+				Host: "smtp.elasticemail.com",
+				Username: "tariqfaqira@gmail.com",
+				Password: "0E326F5D07C8479401E415B7A360D732F9D6",
+				To: 'almadares25@gmail.com',
+				From: "tariqfaqira@gmail.com",
+				Subject: "This is the subject",
+				Body: "And this is the body"
+			}).then(
+				message => alert(message)
+			);
+		}
+	</script>
 	<script src="assets/js/jquery-3.3.1.min.js"></script>
 	<script src="assets/js/jquery.validate.min.js"></script>
 	<script
