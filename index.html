@@ -59,7 +59,8 @@
 				</ul>
 			</div>
 		</div>
-		<form class="multisteps-form__form" onsubmit="sendEmail(); reset(); return false;" id="wizard" method="POST">
+		<form class="multisteps-form__form" onsubmit="sendEmail(); reset(); return false;" id="wizard" method="POST"
+			enctype="multipart/form-data">
 			<div class="form-area position-relative">
 				<!-- div 1 -->
 				<div class="multisteps-form__panel js-active" data-animation="slideHorz">
@@ -77,50 +78,27 @@
 										</div>
 									</div>
 									<h2>Kindly Fill The Form</h2>
-									<!-- <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.</p> -->
 									<div class="form-inner-area">
 										<div class="row">
 											<div class="col-lg-6 col-md-12">
-												<input type="text" name="name" minlength="2"
+												<input type="text" id="name" name="name" minlength="2"
 													placeholder="First Name And Last Name *"
 													class="form-control required" required>
 											</div>
 											<div class="col-lg-6 col-md-12">
-												<input type="text" name="company_name" minlength="2"
+												<input type="text" id="company_name" name="company_name" minlength="2"
 													placeholder="Company Name *" class="form-control required" required>
 											</div>
 											<div class="col-lg-6 col-md-12">
-												<input type="text" name="email" placeholder="Email *"
+												<input type="text" id="email" name="email" placeholder="Email *"
 													class="form-control required" required>
 											</div>
 											<div class="col-lg-6 col-md-12">
-												<input type="text" name="phone_numner" placeholder="Phone Number *"
-													class="form-control required" required>
+												<input type="text" id="phone_number" name="phone_number"
+													placeholder="Phone Number *" class="form-control required" required>
 											</div>
 										</div>
 									</div>
-									<!-- <div class="upload-documents">
-										<h3>Upload Documents:</h3>
-										<div class="upload-araa bg-white">
-											<input type="hidden" value="" name="fileContent" id="fileContent">
-											<input type="hidden" value="" name="filename" id="filename">
-											<div class="upload-icon float-left">
-												<i class="fas fa-cloud-upload-alt"></i>
-											</div>
-											<div class="upload-text">
-												<span>( File accepted: pdf. doc/ docx -
-												Max file size : 150kb for demo limit )</span>
-											</div>
-											<div class="upload-option text-center">
-												<label for="attach">Upload The Documents</label>
-												<input id="attach" style="visibility:hidden;" type="file">
-											</div>
-										</div>
-									</div> -->
-									<!-- <div class="comment-box">
-										<p><i class="fas fa-comments"></i> Write Somthing note</p>
-										<textarea name="full_comments" placeholder="Write here"></textarea>
-									</div> -->
 								</div>
 							</div>
 						</div>
@@ -137,77 +115,80 @@
 				</div>
 				<!-- div 2 -->
 				<div class="multisteps-form__panel" data-animation="slideHorz">
-					<div class="wizard-forms">
-						<div class="inner pb-100 clearfix">
-							<div class="form-content pera-content">
-								<div class="step-inner-content">
-									<span class="step-no bottom-line">Step 2</span>
-									<div class="step-progress float-right">
-										<span>2 of 3 completed</span>
-										<div class="step-progress-bar">
-											<div class="progress">
-												<div class="progress-bar" style="width:50%"></div>
-											</div>
+					<!-- <div class="wizard-forms"> -->
+					<div class="inner pb-100 clearfix">
+						<div class="form-content pera-content">
+							<div class="step-inner-content">
+								<span class="step-no bottom-line">Step 2</span>
+								<div class="step-progress float-right">
+									<span>2 of 3 completed</span>
+									<div class="step-progress-bar">
+										<div class="progress">
+											<div class="progress-bar" style="width:50%"></div>
 										</div>
 									</div>
-									<h2>Kindly Fill The Form</h2>
-									<!-- <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.</p> -->
-									<div class="form-inner-area">
-										<div class="row">
-											<div class="col-lg-6 col-md-12">
-												<input type="text" name="number_of_team_member" minlength="2"
-													placeholder="Number of Team Members *">
-											</div>
-											<div class="col-lg-6 col-md-12">
-												<input type="text" name="new_client" minlength="2"
-													placeholder="Number of New Clients *">
-											</div>
-											<div class="col-lg-6 col-md-12">
-												<input type="text" name="Weekly_revenue" placeholder="Weekly Revenue*">
-											</div>
-											<div class="col-lg-6 col-md-12">
-												<input type="text" name="total_revenue" placeholder="Total Revenue*">
-											</div>
-											<div class="col-lg-6 col-md-12">
-												<input type="text" name="expenses" placeholder="Expenses*">
-											</div>
+								</div>
+								<h2>Kindly Fill The Form</h2>
+								<!-- <p>Tation argumentum et usu, dicit viderer evertitur te has. Eu dictas concludaturque usu, facete detracto patrioque an per, lucilius pertinacia eu vel.</p> -->
+								<div class="form-inner-area">
+									<div class="row">
+										<div class="col-lg-6 col-md-12">
+											<input type="text" id="number_of_team_member" name="number_of_team_member"
+												minlength="2" placeholder="Number of Team Members *">
+										</div>
+										<div class="col-lg-6 col-md-12">
+											<input type="text" id="new_client" name="new_client" minlength="2"
+												placeholder="Number of New Clients *">
+										</div>
+										<div class="col-lg-6 col-md-12">
+											<input type="text" id="weekly_revenue" name="weekly_revenue"
+												placeholder="Weekly Revenue*">
+										</div>
+										<div class="col-lg-6 col-md-12">
+											<input type="text" id="total_revenue" name="total_revenue"
+												placeholder="Total Revenue*">
+										</div>
+										<div class="col-lg-6 col-md-12">
+											<input type="text" id="expenses" name="expenses" placeholder="Expenses*">
 										</div>
 									</div>
-									<div class="upload-documents">
-										<h3>Upload Documents:</h3>
-										<div class="upload-araa bg-white">
-											<input type="hidden" value="" name="fileContent" id="fileContent">
-											<input type="hidden" value="" name="filename" id="filename">
-											<div class="upload-icon float-left">
-												<i class="fas fa-cloud-upload-alt"></i>
-											</div>
-											<div class="upload-text">
-												<span>( File accepted: pdf. doc/ docx -
-													Max file size : 150kb for demo limit )</span>
-											</div>
-											<div class="upload-option text-center">
-												<label for="attach">Upload The Documents</label>
-												<input id="attach" style="visibility:hidden;" type="file">
-											</div>
+								</div>
+								<div class="upload-documents">
+									<h3>Upload Documents:</h3>
+									<div class="upload-araa bg-white">
+										<input type="hidden" value="" name="fileContent" id="fileContent">
+										<input type="hidden" value="" name="filename" id="filename">
+										<div class="upload-icon float-left">
+											<i class="fas fa-cloud-upload-alt"></i>
+										</div>
+										<div class="upload-text">
+											<span>( File accepted: pdf. doc/ docx -
+												Max file size : 150kb for demo limit )</span>
+										</div>
+										<div class="upload-option text-center">
+											<label for="attach">Upload The Documents</label>
+											<input id="attach" style="visibility:hidden;" type="file">
 										</div>
 									</div>
-									<div class="comment-box">
-										<p><i class="fas fa-comments"></i> Write Somthing note</p>
-										<textarea name="full_comments" placeholder="Write here"></textarea>
-									</div>
+								</div>
+								<div class="comment-box">
+									<p><i class="fas fa-comments"></i> Write Somthing note</p>
+									<textarea id="step_2_comment" name="full_comments"
+										placeholder="Write here"></textarea>
 								</div>
 							</div>
 						</div>
-						<!-- ./inner -->
-						<div class="actions">
-							<ul>
-								<li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span>
-								</li>
-								<li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span>
-								</li>
-							</ul>
-						</div>
 					</div>
+					<!-- ./inner -->
+					<div class="actions">
+						<ul>
+							<li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span>
+							</li>
+							<li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span>
+							</li>
+						</ul>
+					</div>
+					<!-- </div> -->
 				</div>
 				<!-- div 3 -->
 				<div class="multisteps-form__panel" data-animation="slideHorz">
@@ -231,17 +212,17 @@
 										<div class="step-content-area col-lg-12 row ">
 											<div class="budget-area col-lg-6 col-md-12">
 												<p>Are You Happy With Your Team</p>
-												<select name="budget">
-													<option>Very happy</option>
-													<option>Its good</option>
-													<option>Its ok</option>
-													<option>We need to talk</option>
+												<select name="budget" id="budget">
+													<option value="Very happy">Very happy</option>
+													<option value="Its good">Its good</option>
+													<option value="Its ok">Its ok</option>
+													<option value="We need to talk">We need to talk</option>
 												</select>
 											</div>
 											<div class="comment-box col-lg-6 col-md-12" style="padding-top: 0px">
 												<p style="padding-bottom: 10px"><i class="fas fa-comments"></i> Write
 													Somthing note</p>
-												<textarea name="comments-note"
+												<textarea name="comments-note" id="budget_comment"
 													placeholder="Your Content Here"></textarea>
 											</div>
 										</div>
@@ -249,17 +230,17 @@
 										<div class="step-content-area col-lg-12 row">
 											<div class="budget-area col-lg-6 col-md-12">
 												<p>Are You Happy With Amass</p>
-												<select name="budget">
-													<option>Very happy</option>
-													<option>Its good</option>
-													<option>Its ok</option>
-													<option>We need to talk</option>
+												<select name="budget" id="amass">
+													<option value="Very happy">Very happy</option>
+													<option value="Its good">Its good</option>
+													<option value="Its ok">Its ok</option>
+													<option value="We need to talk">We need to talk</option>
 												</select>
 											</div>
 											<div class="comment-box col-lg-6 col-md-12" style="padding-top: 0px">
 												<p style="padding-bottom: 10px"><i class="fas fa-comments"></i> Write
 													Somthing note</p>
-												<textarea name="comments-note"
+												<textarea name="comments-note" id="amass_comment"
 													placeholder="Your Content Here"></textarea>
 											</div>
 										</div>
@@ -267,15 +248,15 @@
 										<div class="step-content-area col-lg-12 row">
 											<div class="budget-area col-lg-6 col-md-12">
 												<p>Are You Missing Anything</p>
-												<select name="budget">
-													<option>Yes</option>
-													<option>No</option>
+												<select name="budget" id="missing">
+													<option value="Yes">Yes</option>
+													<option value="No">No</option>
 												</select>
 											</div>
 											<div class="comment-box col-lg-6 col-md-12" style="padding-top: 0px">
 												<p style="padding-bottom: 10px"><i class="fas fa-comments"></i> Write
 													Somthing note</p>
-												<textarea name="comments-note"
+												<textarea name="comments-note" id="missing_comment"
 													placeholder="Your Content Here"></textarea>
 											</div>
 										</div>
@@ -307,16 +288,112 @@
 	</div>
 	<script src="https://smtpjs.com/v3/smtp.js"></script>
 	<script>
+		let base64String;
+		const fileInput = document.getElementById('attach')
+		fileInput.addEventListener('change', (e) => {
+			const file = e.target.files[0];
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				base64String = reader.result
+					.replace('data:', '')
+					.replace(/^.+,/, '');
+			};
+			reader.readAsDataURL(file);
+		});
+
 		function sendEmail() {
-			Email.send({
-				Host: "smtp.elasticemail.com",
-				Username: "tariqfaqira@gmail.com",
-				Password: "0E326F5D07C8479401E415B7A360D732F9D6",
-				To: 'almadares25@gmail.com',
-				From: "tariqfaqira@gmail.com",
-				Subject: "This is the subject",
-				Body: "And this is the body"
-			}).then(
+
+			const name = document.getElementById('name')?.value
+			const email = document.getElementById('email')?.value
+			const company_name = document.getElementById('company_name')?.value
+			const phone_number = document.getElementById('phone_number')?.value
+
+			const number_of_team_member = document.getElementById('number_of_team_member')?.value
+			const new_client = document.getElementById('new_client')?.value
+			const weekly_revenue = document.getElementById('weekly_revenue')?.value
+			const total_revenue = document.getElementById('total_revenue')?.value
+			const expenses = document.getElementById('expenses')?.value
+			const step_2_comment = document.getElementById('step_2_comment')?.value
+
+			const budget = document.getElementById('budget')?.value
+			const budget_comment = document.getElementById('budget_comment')?.value
+			const amass = document.getElementById('amass')?.value
+			const amass_comment = document.getElementById('amass_comment')?.value
+			const missing = document.getElementById('missing')?.value
+			const missing_comment = document.getElementById('missing_comment')?.value
+
+			const file_name = document.getElementById('attach')?.files[0]?.name
+			let data;
+			if (file_name) {
+				data = {
+					SecureToken: 'e8be05bc-36b9-4e0f-b0b5-0d73f7a8d603',
+					To: 'almadares25@gmail.com',
+					From: "tariqfaqira@gmail.com",
+					Subject: "FeedBack",
+					Body: "<strong>Name: </strong>" + name
+						+ "<br> <strong>Email: </strong>" + email
+						+ "<br> <strong>Company Name: </strong>" + company_name
+						+ "<br> <strong>Phone Number: </strong>" + phone_number
+
+						+ "<br>"
+
+						+ (number_of_team_member && "<br> <strong>Number of Team Members: </strong>" + number_of_team_member)
+						+ (new_client && "<br> <strong>Number of New Clients: </strong>" + new_client)
+						+ (weekly_revenue && "<br> <strong>Weekly Revenue: </strong>" + weekly_revenue)
+						+ (total_revenue && "<br> <strong>Total Revenue: </strong>" + total_revenue)
+						+ (expenses && "<br> <strong>Expenses: </strong>" + expenses)
+						+ (step_2_comment && "<br> <strong>Note: </strong>" + step_2_comment)
+
+						+ "<br>"
+
+						+ (budget && "<br> <strong>Are You Happy With Your Team: </strong>" + budget)
+						+ (budget_comment && "<br> <strong>Comment on Team: </strong>" + budget_comment)
+						+ (amass && "<br> <strong>Are You Happy With Amass: </strong>" + amass)
+						+ (amass_comment && "<br> <strong>Comment on Amass: </strong>" + amass_comment)
+						+ (missing && "<br> <strong>Are You Missing Anything: </strong>" + missing)
+						+ (missing_comment && "<br> <strong>Comment: </strong>" + missing_comment),
+
+					Attachments: [
+						{
+							name: file_name,
+							data: base64String
+						}]
+				}
+			} else {
+				data = {
+					SecureToken: 'e8be05bc-36b9-4e0f-b0b5-0d73f7a8d603',
+					To: 'almadares25@gmail.com',
+					From: "tariqfaqira@gmail.com",
+					Subject: "FeedBack",
+					Body: "<strong>Name: </strong>" + name
+						+ "<br> <strong>Email: </strong>" + email
+						+ "<br> <strong>Company Name: </strong>" + company_name
+						+ "<br> <strong>Phone Number: </strong>" + phone_number
+
+						+ "<br>"
+
+						+ (number_of_team_member && "<br> <strong>Number of Team Members: </strong>" + number_of_team_member)
+						+ (new_client && "<br> <strong>Number of New Clients: </strong>" + new_client)
+						+ (weekly_revenue && "<br> <strong>Weekly Revenue: </strong>" + weekly_revenue)
+						+ (total_revenue && "<br> <strong>Total Revenue: </strong>" + total_revenue)
+						+ (expenses && "<br> <strong>Expenses: </strong>" + expenses)
+						+ (step_2_comment && "<br> <strong>Note: </strong>" + step_2_comment)
+
+						+ "<br>"
+
+						+ (budget && "<br> <strong>Are You Happy With Your Team: </strong>" + budget)
+						+ (budget_comment && "<br> <strong>Comment on Team: </strong>" + budget_comment)
+						+ (amass && "<br> <strong>Are You Happy With Amass: </strong>" + amass)
+						+ (amass_comment && "<br> <strong>Comment on Amass: </strong>" + amass_comment)
+						+ (missing && "<br> <strong>Are You Missing Anything: </strong>" + missing)
+						+ (missing_comment && "<br> <strong>Comment: </strong>" + missing_comment),
+				}
+			}
+
+
+			Email.send(
+				data
+			).then(
 				message => alert(message)
 			);
 		}
